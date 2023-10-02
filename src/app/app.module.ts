@@ -9,6 +9,9 @@ import {QuizMakerComponent} from './quiz-maker/quiz-maker.component';
 import { QuizComponent } from './quiz/quiz.component';
 import { QuestionComponent } from './question/question.component';
 import { AnswersComponent } from './answers/answers.component';
+import { AutoFilterComponent } from './auto-filter/auto-filter.component';
+import { FilterItemByNamePipe } from './pipes/filter-item-by-name.pipe';
+import { HighlightWordDirective } from './highlight-word.directive';
 
 @NgModule({
   declarations: [
@@ -16,7 +19,10 @@ import { AnswersComponent } from './answers/answers.component';
     QuizMakerComponent,
     QuizComponent,
     QuestionComponent,
-    AnswersComponent
+    AnswersComponent,
+    AutoFilterComponent,
+    FilterItemByNamePipe,
+    HighlightWordDirective
   ],
   imports: [
     BrowserModule,
@@ -24,7 +30,7 @@ import { AnswersComponent } from './answers/answers.component';
     HttpClientModule,
     FormsModule
   ],
-  providers: [],
+  providers: [FilterItemByNamePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule {

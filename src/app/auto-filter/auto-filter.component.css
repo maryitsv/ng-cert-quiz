@@ -1,0 +1,17 @@
+.auto-filter{
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.auto-filter-list{
+    position: absolute;
+    background: white;
+    padding: 10px;
+    margin-top: -3px;
+
+    > li{
+        padding: 5px;
+        list-style: none;
+    }
+}
+

@@ -1,0 +1,15 @@
+<div class="auto-filter">
+    
+    <div class="row">
+        <input [(ngModel)]="search" (focus)="searchFocusIn()" (keyup)="searchChange()" [placeholder]="labelText">
+        <span class="align-self-center" (click)="clear()">X</span>
+    </div>
+    
+    <ul class='auto-filter-list' *ngIf="showList">
+        <li *ngFor="let item of list | filterItemByName:search | slice:0:20"
+            (click)="onSelectOption($event,item)"
+            appHighlightWord [searchedWord]="search" [originalWord]="item.name">
+        </li>
+        <li *ngIf="showZeroState">No data to show</li>
+    </ul>
+</div>
