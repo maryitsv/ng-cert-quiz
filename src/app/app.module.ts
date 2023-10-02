@@ -30,7 +30,7 @@ import { HighlightWordDirective } from './highlight-word.directive';
     HttpClientModule,
     FormsModule
   ],
-  providers: [FilterItemByNamePipe],
+  providers: [FilterItemByNamePipe], // added here because whne try to use directly in the auto filter the services was not found
   bootstrap: [AppComponent]
 })
 export class AppModule {

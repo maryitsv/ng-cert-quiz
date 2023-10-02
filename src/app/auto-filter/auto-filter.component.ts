@@ -25,7 +25,7 @@ export class AutoFilterComponent<T extends FilterItem = FilterItem>{
     this.showZeroState = this.filterItemsByName.transform(this.list, this.search).length === 0;
   }
 
-  onSelectOption(event:MouseEvent, item: any) {
+  onSelectOption(event:MouseEvent, item: any): void{
     event.stopPropagation();
     console.log('on auto filter select option', item);
     this.search = item.name;
@@ -34,17 +34,17 @@ export class AutoFilterComponent<T extends FilterItem = FilterItem>{
     this.searchFocusOut();
   }
 
-  searchFocusIn(){
+  searchFocusIn(): void{
     console.log('on auto filter show list');
     this.showList = true;
   }
 
-  searchFocusOut(){
+  searchFocusOut(): void{
     console.log('on auto filter hide list');
     this.showList = false;
   }
 
-  clear(){
+  clearSearch(): void{
     this.search = '';
     this.itemSelected.emit(undefined);
     this.searchFocusOut();

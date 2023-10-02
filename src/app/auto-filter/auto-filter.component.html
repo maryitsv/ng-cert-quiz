@@ -2,7 +2,7 @@
     
     <div class="row">
         <input [(ngModel)]="search" (focus)="searchFocusIn()" (keyup)="searchChange()" [placeholder]="labelText">
-        <span class="align-self-center" (click)="clear()">X</span>
+        <span class="align-self-center" (click)="clearSearch()">X</span>
     </div>
     
     <ul class='auto-filter-list' *ngIf="showList">

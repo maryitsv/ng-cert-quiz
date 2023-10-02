@@ -1,5 +1,6 @@
-import {ChangeDetectionStrategy, Component, EventEmitter, Input, Output} from '@angular/core';
+import {ChangeDetectionStrategy, Component, EventEmitter, Input, Output, inject} from '@angular/core';
 import {Question} from '../data.models';
+import { QuizService } from '../quiz.service';
 
 @Component({
   selector: 'app-question',
@@ -10,10 +11,13 @@ export class QuestionComponent {
 
   @Input({required: true})
   question!: Question;
+  @Input({required: true})
+  questionIndex!: number;
   @Input()
   correctAnswer?: string;
   @Input()
   userAnswer?: string;
+  @Input() showChangeQuestionButton:boolean | null = false;
 
   getButtonClass(answer: string): string {
     if (! this.userAnswer) {
@@ -31,10 +35,19 @@ export class QuestionComponent {
   @Output()
   change = new EventEmitter<string>();
 
+  @Output()
+  questionChanged = new EventEmitter<Question>();
+
   currentSelection!: string;
+
 
   buttonClicked(answer: string): void {
     this.currentSelection = answer;
     this.change.emit(answer);
+  }
+
+  changeQuestion(): void{
+    
+    this.questionChanged.emit(this.question);
   }
 }
