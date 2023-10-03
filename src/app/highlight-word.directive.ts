@@ -7,7 +7,7 @@ export class HighlightWordDirective implements OnChanges{
   @Input() searchedWord: string ='';
   @Input() originalWord: string ='';
 
-  constructor(private elementRef:ElementRef,private renderer:Renderer2) {
+  constructor(private elementRef:ElementRef, private renderer:Renderer2) {
   }
 
   ngOnChanges(changes: SimpleChanges): void {

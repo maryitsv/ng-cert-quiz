@@ -9,14 +9,10 @@ import { QuizService } from '../quiz.service';
 })
 export class QuestionComponent {
 
-  @Input({required: true})
-  question!: Question;
-  @Input({required: true})
-  questionIndex!: number;
-  @Input()
-  correctAnswer?: string;
-  @Input()
-  userAnswer?: string;
+  @Input({required: true}) question!: Question;
+  @Input({required: true}) questionIndex!: number;
+  @Input() correctAnswer?: string;
+  @Input() userAnswer?: string;
   @Input() showChangeQuestionButton:boolean | null = false;
 
   getButtonClass(answer: string): string {
@@ -35,7 +31,7 @@ export class QuestionComponent {
   @Output()
   change = new EventEmitter<string>();
 
-  @Output()
+  @Output() 
   questionChanged = new EventEmitter<Question>();
 
   currentSelection!: string;

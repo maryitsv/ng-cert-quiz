@@ -12,10 +12,20 @@ describe('AnswersComponent', () => {
     });
     fixture = TestBed.createComponent(AnswersComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
   it('should create', () => {
+    component.data = {
+      questions: [{
+        question: "",
+        correct_answer: "d",
+        incorrect_answers: ["a", "b", "c"],
+        all_answers: ["a", "b", "c", "d"]
+      }],
+      answers: [],
+      score: 0
+    };
+    fixture.detectChanges();
     expect(component).toBeTruthy();
   });
 });

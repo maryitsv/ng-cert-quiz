@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AutoFilterComponent } from './auto-filter.component';
+import { FilterItemByNamePipe } from '../pipes/filter-item-by-name.pipe';
 
 describe('AutoFilterComponent', () => {
   let component: AutoFilterComponent;
@@ -8,7 +9,8 @@ describe('AutoFilterComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [AutoFilterComponent]
+      declarations: [AutoFilterComponent],
+      providers:[FilterItemByNamePipe]
     });
     fixture = TestBed.createComponent(AutoFilterComponent);
     component = fixture.componentInstance;

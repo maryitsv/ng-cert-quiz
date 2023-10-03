@@ -26,7 +26,7 @@ export class QuizService {
   constructor(private http: HttpClient) {
   }
 
-  initialize() {
+  initialize(): void {
     this.http.get<{ trivia_categories: Category[] }>(this.API_URL + "api_category.php").pipe(
       map(res => {
         return this.processCategories(res.trivia_categories);
@@ -101,14 +101,14 @@ export class QuizService {
     return this.questionsStored$;
   }
 
-  processQuestion(res: { results: ApiQuestion[] }) {
+  processQuestion(res: { results: ApiQuestion[] }): Question[]{
     const quiz: Question[] = res.results.map(q => (
       { ...q, all_answers: [...q.incorrect_answers, q.correct_answer].sort(() => (Math.random() > 0.5) ? 1 : -1) }
     ));
     return quiz;
   }
 
-  changeQuestion(questions: Question[], questionToChangeIndex: number) {
+  changeQuestion(questions: Question[], questionToChangeIndex: number): void {
     this.createQuizBase(this.previousFilter.categoryId, this.previousFilter.difficulty, 1).subscribe(questionProccesed => {
       questions[questionToChangeIndex] = questionProccesed[0];
       this.subjectQuestions.next(questions);

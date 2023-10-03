@@ -1,6 +1,7 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FilterItem } from '../data.models';
 import { FilterItemByNamePipe } from '../pipes/filter-item-by-name.pipe';
+import { debounce, debounceTime, fromEvent } from 'rxjs';
 
 @Component({
   selector: 'app-auto-filter',
@@ -22,7 +23,7 @@ export class AutoFilterComponent<T extends FilterItem = FilterItem> implements O
   listLength: number = 0;
   increment: number = 5;
 
-  constructor(private filterItemsByName:FilterItemByNamePipe){
+  constructor(private filterItemsByName:FilterItemByNamePipe, private elementRef: ElementRef){
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -46,7 +47,7 @@ export class AutoFilterComponent<T extends FilterItem = FilterItem> implements O
     this.search = item.name;
     this.valueChange.emit(item.id as string);// for 2 way data binding
     this.itemSelected.emit(item);// just in case someone need the object
-    this.searchFocusOut();
+    this.showList = false;
     this.searchChange();
   }
 
@@ -57,20 +58,29 @@ export class AutoFilterComponent<T extends FilterItem = FilterItem> implements O
 
   searchFocusOut(): void{
     console.log('on auto filter hide list');
-    this.showList = false;
+    fromEvent(this.elementRef.nativeElement,'focusout')
+    .pipe( debounceTime(500))
+    .subscribe(item=>{
+      console.log("in the focus out")
+      this.showList = false;
+    })
   }
 
   clearSearch(): void{
     this.search = '';
-    this.limitToShow = this.defaultLimit; 
+    this.limitToShow = this.defaultLimit;
+    this.showList = false;
     this.itemSelected.emit(undefined);
     this.valueChange.emit(undefined);
-    this.searchFocusOut();
     this.searchChange();
   }
 
-  showMore(){
+  showMore(): void{
     this.limitToShow = this.limitToShow + this.increment;
     console.log('auto filter show limit', this.limitToShow, this.listLength);
+  }
+
+  itemTrackBy(index:number, item: FilterItem ): number | string {
+    return item?.id;
   }
 }

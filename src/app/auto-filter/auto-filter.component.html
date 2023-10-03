@@ -1,12 +1,12 @@
-<div class="auto-filter">
-    
+<div class="auto-filter" (focusout)="searchFocusOut()">
+
     <div class="row">
         <input [(ngModel)]="search" (focus)="searchFocusIn()" (keyup)="searchChange()" [placeholder]="labelText">
         <span class="align-self-center" (click)="clearSearch()">X</span>
     </div>
-    
+
     <ul class='auto-filter-list' *ngIf="showList">
-        <li *ngFor="let item of list | filterItemByName:search | slice:0:limitToShow"
+        <li *ngFor="let item of list | filterItemByName:search | slice:0:limitToShow ; trackBy: itemTrackBy"
             (click)="onSelectOption($event,item)"
             appHighlightWord [searchedWord]="search" [originalWord]="item.name">
             {{item.name}}
