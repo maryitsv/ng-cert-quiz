@@ -6,7 +6,8 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "buildgp": "ng build --configuration=production  --output-path docs --base-href https://maryitsv.github.io/ng-cert-quiz/"
   },
   "private": true,
   "dependencies": {
