@@ -3,6 +3,12 @@
     padding-right: 10px;
 }
 
+.auto-filter-search{
+    >input, button{
+        height: 40px;
+    }
+}
+
 .clear{
     margin-left: -3px;
 }

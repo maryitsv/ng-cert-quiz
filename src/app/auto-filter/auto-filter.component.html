@@ -1,6 +1,6 @@
 <div class="auto-filter">
-    <div class="row">
-        <input [(ngModel)]="search" (focus)="searchFocusIn()" (keyup)="searchChange()" [placeholder]="labelText">
+    <div class="auto-filter-search row">
+        <input class="align-self-center" [(ngModel)]="search" (focus)="searchFocusIn()" (keyup)="searchChange()" [placeholder]="labelText">
         <button class="clear align-self-center" (click)="clearSearch()">X</button>
     </div>
 
