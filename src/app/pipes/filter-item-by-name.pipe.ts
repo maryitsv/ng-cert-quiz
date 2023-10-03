@@ -8,9 +8,6 @@ export class FilterItemByNamePipe implements PipeTransform {
 
   transform(list: FilterItem[]=[], search: string=''): FilterItem[] {
 
-    console.log('in the pipe list',list);
-    console.log('in the pipe search',search);
-    
     if (!search) {
       return list;
     }

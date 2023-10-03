@@ -11,13 +11,10 @@ export class HighlightWordDirective implements OnChanges{
   }
 
   ngOnChanges(): void {
-    console.log('in the directive');
-
     let newContent = this.originalWord;
     
     if(this.searchedWord){
       newContent = this.highlighWord(this.originalWord,this.searchedWord);
-      console.log('in the directive' , newContent);
     }
 
     this.renderer.setProperty(

@@ -28,20 +28,16 @@ export class AutoFilterComponent<T extends FilterItem = FilterItem> implements O
   ngOnChanges(changes: SimpleChanges): void {
     if('list' in changes){
       this.listLength = this.list.length;
-      console.log('auto filter search init',this.listLength);
     }
   }
 
   searchChange(): void {
-    console.log('auto filter search change');
     this.listLength = this.filterItemsByName.transform(this.list, this.search).length;
-    console.log('auto filter search change',this.listLength);
-    this.showZeroState = this.listLength === 0;
+    this.showZeroState = this.listLength === 0 ? true : false;
   }
 
   onSelectOption(event: Event, itemIn:unknown): void{
     event.stopPropagation();
-    console.log('on auto filter select option', itemIn);
     const item = itemIn as T;
     this.search = item.name;
     this.valueChange.emit(item.id as string);// for 2 way data binding
@@ -51,17 +47,14 @@ export class AutoFilterComponent<T extends FilterItem = FilterItem> implements O
   }
 
   searchFocusIn(): void{
-    console.log('on auto filter show list');
     this.showList = true;
   }
 
   /*
   searchFocusOut(): void{
-    console.log('on auto filter hide list');
     fromEvent(this.elementRef.nativeElement,'focusout')
     .pipe( debounceTime(300))
     .subscribe(item=>{
-      console.log("in the focus out")
       this.showList = false;
     })
   }*/
@@ -77,7 +70,6 @@ export class AutoFilterComponent<T extends FilterItem = FilterItem> implements O
 
   showMore(): void{
     this.limitToShow = this.limitToShow + this.increment;
-    console.log('auto filter show limit', this.limitToShow, this.listLength);
   }
 
   itemTrackBy(index:number, item: FilterItem ): number | string {

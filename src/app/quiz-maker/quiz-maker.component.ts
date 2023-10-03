@@ -36,10 +36,8 @@ export class QuizMakerComponent {
       categoryId = this.subCategorySelected;
     } else {
       this.subCategories$?.pipe(take(1)).subscribe(subcategories => {
-        console.log('hey inside the validation')
         if (subcategories.length > 0) {
           // in this case the user shoudl pick a subcategory
-          console.log('Hey the user shoul pick a subcategory');
           categoryId = this.defaultSubCategory;
         } else {
           categoryId = this.categorySelected;
@@ -51,16 +49,12 @@ export class QuizMakerComponent {
   }
 
   createQuiz(): void {
-    console.log('createQuiz category', this.categorySelected);
-    console.log('createQuiz subCategorySelected', this.subCategorySelected);
-    console.log('createQuiz difficultySelected', this.difficultySelected);
     const categoryId = this.buildCategoryId();
     this.questions$ = this.quizService.createQuiz(categoryId , this.difficultySelected as Difficulty);
   }
 
   changeSubCategories(category:Category): void{
     const categoryId = category?.id?.toString();
-    console.log('changeSubCategories by categoryId', categoryId);
     this.subCategorySelected = 'Select subcategory';
     this.subCategories$ = this.quizService.getSubcategoryByCategoryId(categoryId);
   }

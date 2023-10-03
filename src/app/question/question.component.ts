@@ -15,14 +15,14 @@ export class QuestionComponent {
   @Input() showChangeQuestionButton:boolean | null = false;
 
   getButtonClass(answer: string): string {
-    if (! this.userAnswer) {
-        if (this.currentSelection == answer)
-          return "tertiary";
-    } else {
-      if (this.userAnswer == this.correctAnswer && this.userAnswer == answer)
-        return "tertiary";
-      if (answer == this.correctAnswer)
-        return "secondary";
+    if (!this.userAnswer && this.currentSelection === answer) {
+      return "tertiary";
+    }
+    if (this.userAnswer && this.correctAnswer === answer && this.userAnswer === answer) {
+      return "tertiary";
+    }
+    if (this.userAnswer && this.correctAnswer === answer) {
+      return "secondary";
     }
     return "primary";
   }

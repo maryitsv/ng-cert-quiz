@@ -33,7 +33,6 @@ export class QuizService {
       }),
       tap(items => console.log(items)),
       catchError(error => {
-        console.log('Error getting the data', error);
         return [];
       })
     ).subscribe(categories => this.subjectCategories.next(categories));
@@ -46,7 +45,6 @@ export class QuizService {
   getSubcategoryByCategoryId(categoryId: string): Observable<SubCategory[]> {
     return this.categoriesStored$.pipe(
       map((categories: Category[]) => {
-        console.log('busca subcategory')
         const categoryFound = categories.find(category => (category.id as unknown as string) == categoryId);
         if (categoryFound) {
           return categoryFound?.subCategories;
