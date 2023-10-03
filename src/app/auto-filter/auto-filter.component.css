@@ -3,10 +3,13 @@
     padding-right: 10px;
 }
 
+.clear{
+    margin-left: -3px;
+}
+
 .auto-filter-list{
     position: absolute;
     background: white;
-    padding: 10px;
     margin-top: -3px;
     max-height: 330px;
     overflow: auto;

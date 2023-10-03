@@ -1,4 +1,4 @@
-import { Directive, ElementRef, Input, OnChanges, Renderer2, SimpleChanges } from '@angular/core';
+import { Directive, ElementRef, Input, OnChanges, Renderer2 } from '@angular/core';
 
 @Directive({
   selector: '[appHighlightWord]'
@@ -10,7 +10,7 @@ export class HighlightWordDirective implements OnChanges{
   constructor(private elementRef:ElementRef, private renderer:Renderer2) {
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
+  ngOnChanges(): void {
     console.log('in the directive');
 
     let newContent = this.originalWord;

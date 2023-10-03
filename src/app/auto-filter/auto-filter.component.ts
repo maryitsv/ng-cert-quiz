@@ -1,7 +1,6 @@
-import { Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { FilterItem } from '../data.models';
 import { FilterItemByNamePipe } from '../pipes/filter-item-by-name.pipe';
-import { debounce, debounceTime, fromEvent } from 'rxjs';
 
 @Component({
   selector: 'app-auto-filter',
@@ -10,8 +9,8 @@ import { debounce, debounceTime, fromEvent } from 'rxjs';
 })
 export class AutoFilterComponent<T extends FilterItem = FilterItem> implements OnChanges{
   @Input() list:T[] = [];
-  @Input() labelText: string = '';
-  @Input() value: string = '';
+  @Input() labelText = '';
+  @Input() value = '';
   @Output() itemSelected = new EventEmitter<T>();
   @Output() valueChange = new EventEmitter<string>();
   
@@ -40,7 +39,7 @@ export class AutoFilterComponent<T extends FilterItem = FilterItem> implements O
     this.showZeroState = this.listLength === 0;
   }
 
-  onSelectOption(event:MouseEvent, itemIn:unknown): void{
+  onSelectOption(event: Event, itemIn:unknown): void{
     event.stopPropagation();
     console.log('on auto filter select option', itemIn);
     const item = itemIn as T;
@@ -56,15 +55,16 @@ export class AutoFilterComponent<T extends FilterItem = FilterItem> implements O
     this.showList = true;
   }
 
+  /*
   searchFocusOut(): void{
     console.log('on auto filter hide list');
     fromEvent(this.elementRef.nativeElement,'focusout')
-    .pipe( debounceTime(500))
+    .pipe( debounceTime(300))
     .subscribe(item=>{
       console.log("in the focus out")
       this.showList = false;
     })
-  }
+  }*/
 
   clearSearch(): void{
     this.search = '';

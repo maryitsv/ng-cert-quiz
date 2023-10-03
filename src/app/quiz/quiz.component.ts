@@ -1,4 +1,4 @@
-import {Component, EventEmitter, inject, Input, Output} from '@angular/core';
+import {Component, inject, Input} from '@angular/core';
 import {Question} from '../data.models';
 import {QuizService} from '../quiz.service';
 import {Router} from '@angular/router';
@@ -25,8 +25,7 @@ export class QuizComponent {
     this.router.navigateByUrl("/result");
   }
 
-  changeQuestion(event:any, index:number): void{
-    console.log('on change question in the quiz component', event);
+  changeQuestion(index:number): void{
 
     if (this.questions) {
       this.quizService.changeQuestion(this.questions, index);

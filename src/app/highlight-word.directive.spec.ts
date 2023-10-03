@@ -1,4 +1,4 @@
-import { HighlightWordDirective } from './highlight-word.directive';
+//import { HighlightWordDirective } from './highlight-word.directive';
 
 describe('HighlightWordDirective', () => {
   xit('should create an instance', () => {

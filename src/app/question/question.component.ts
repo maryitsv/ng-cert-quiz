@@ -1,6 +1,5 @@
-import {ChangeDetectionStrategy, Component, EventEmitter, Input, Output, inject} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Question} from '../data.models';
-import { QuizService } from '../quiz.service';
 
 @Component({
   selector: 'app-question',

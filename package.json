@@ -7,7 +7,8 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "buildgp": "ng build --configuration=production  --output-path docs --base-href https://maryitsv.github.io/ng-cert-quiz/"
+    "buildgp": "ng build --configuration=production  --output-path docs --base-href https://maryitsv.github.io/ng-cert-quiz/",
+    "lint": "ng lint"
   },
   "private": true,
   "dependencies": {
@@ -28,10 +29,18 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^16.0.0",
+    "@angular-eslint/builder": "16.2.0",
+    "@angular-eslint/eslint-plugin": "16.2.0",
+    "@angular-eslint/eslint-plugin-template": "16.2.0",
+    "@angular-eslint/schematics": "16.2.0",
+    "@angular-eslint/template-parser": "16.2.0",
     "@angular/cli": "~16.0.0",
     "@angular/compiler-cli": "^16.0.0",
     "@types/jasmine": "~4.0.0",
+    "@typescript-eslint/eslint-plugin": "5.62.0",
+    "@typescript-eslint/parser": "5.62.0",
     "angular-cli-ghpages": "^1.0.7",
+    "eslint": "^8.49.0",
     "jasmine-core": "~4.1.0",
     "karma": "~6.3.0",
     "karma-chrome-launcher": "~3.1.0",

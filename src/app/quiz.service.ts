@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, catchError, map, Observable, of, shareReplay, tap } from 'rxjs';
+import { BehaviorSubject, catchError, map, Observable, tap } from 'rxjs';
 import { Category, Difficulty, ApiQuestion, Question, Results, SubCategory } from './data.models';
 
 @Injectable({
@@ -66,7 +66,7 @@ export class QuizService {
       // this is science or geography
       const subcategory = categoryNameTriviaSplited[1];
 
-      if (!categories.hasOwnProperty(categoryName)) {
+      if (!Object.prototype.hasOwnProperty.call( categories, categoryName)) {
         categories[categoryName] = {
           name: categoryName,
           id: category.id,
