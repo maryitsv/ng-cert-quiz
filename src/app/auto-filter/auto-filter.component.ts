@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FilterItem } from '../data.models';
 import { FilterItemByNamePipe } from '../pipes/filter-item-by-name.pipe';
 
@@ -7,7 +7,7 @@ import { FilterItemByNamePipe } from '../pipes/filter-item-by-name.pipe';
   templateUrl: './auto-filter.component.html',
   styleUrls: ['./auto-filter.component.css']
 })
-export class AutoFilterComponent<T extends FilterItem = FilterItem>{
+export class AutoFilterComponent<T extends FilterItem = FilterItem> implements OnChanges{
   @Input() list:T[] = [];
   @Input() labelText: string = '';
   @Input() value: string = '';
@@ -17,21 +17,37 @@ export class AutoFilterComponent<T extends FilterItem = FilterItem>{
   search: string = '';
   showList: boolean = false;
   showZeroState: boolean = false;
+  defaultLimit: number = 5;
+  limitToShow: number = this.defaultLimit;
+  listLength: number = 0;
+  increment: number = 5;
 
   constructor(private filterItemsByName:FilterItemByNamePipe){
   }
 
-  searchChange(): void {
-    this.showZeroState = this.filterItemsByName.transform(this.list, this.search).length === 0;
+  ngOnChanges(changes: SimpleChanges): void {
+    if('list' in changes){
+      this.listLength = this.list.length;
+      console.log('auto filter search init',this.listLength);
+    }
   }
 
-  onSelectOption(event:MouseEvent, item: any): void{
+  searchChange(): void {
+    console.log('auto filter search change');
+    this.listLength = this.filterItemsByName.transform(this.list, this.search).length;
+    console.log('auto filter search change',this.listLength);
+    this.showZeroState = this.listLength === 0;
+  }
+
+  onSelectOption(event:MouseEvent, itemIn:unknown): void{
     event.stopPropagation();
-    console.log('on auto filter select option', item);
+    console.log('on auto filter select option', itemIn);
+    const item = itemIn as T;
     this.search = item.name;
-    this.itemSelected.emit(item);
-    this.valueChange.emit(item.id);
+    this.valueChange.emit(item.id as string);// for 2 way data binding
+    this.itemSelected.emit(item);// just in case someone need the object
     this.searchFocusOut();
+    this.searchChange();
   }
 
   searchFocusIn(): void{
@@ -46,8 +62,15 @@ export class AutoFilterComponent<T extends FilterItem = FilterItem>{
 
   clearSearch(): void{
     this.search = '';
+    this.limitToShow = this.defaultLimit; 
     this.itemSelected.emit(undefined);
-    this.searchFocusOut();
     this.valueChange.emit(undefined);
+    this.searchFocusOut();
+    this.searchChange();
+  }
+
+  showMore(){
+    this.limitToShow = this.limitToShow + this.increment;
+    console.log('auto filter show limit', this.limitToShow, this.listLength);
   }
 }

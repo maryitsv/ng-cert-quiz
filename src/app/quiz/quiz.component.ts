@@ -30,6 +30,8 @@ export class QuizComponent {
 
     if (this.questions) {
       this.quizService.changeQuestion(this.questions, index);
+      // remove that answer
+      this.userAnswers.splice(index,1);
     }
 
   }

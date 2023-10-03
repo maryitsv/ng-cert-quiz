@@ -1,11 +1,11 @@
 <div class="row">
-  <div class="col">
+  <div class="col align-self-center">
     <ng-container *ngIf="categories$ | async as categories">
       <app-auto-filter labelText="Select category" [list]="categories" [(value)]="categorySelected"
         (itemSelected)="changeSubCategories($event)"></app-auto-filter>
     </ng-container>
   </div>
-  <div class="col">
+  <div class="col align-self-center">
     <ng-container *ngIf="subCategories$ | async as subCategories">
       <ng-container *ngIf="subCategories.length > 0">
         <app-auto-filter labelText="Select subcategories" [list]="subCategories"
@@ -13,7 +13,7 @@
       </ng-container>
     </ng-container>
   </div>
-  <div class="col">
+  <div class="col align-self-center">
     <select #difficulty id="difficultySelect" [(ngModel)]="difficultySelected">
       <option>Select difficulty</option>
       <option>Easy</option>
@@ -22,7 +22,7 @@
     </select>
   </div>
   <div class="col align-self-center">
-    <button class="primary align-self-center" id="createBtn" (click)="createQuiz()">Create</button>
+    <button class="primary" id="createBtn" (click)="createQuiz()">Create</button>
   </div>
 
 </div>

@@ -8,10 +8,17 @@
     background: white;
     padding: 10px;
     margin-top: -3px;
+    max-height: 330px;
+    overflow: auto;
 
     > li{
         padding: 5px;
         list-style: none;
+
+        &:hover {
+            background: #e3e5e7;
+        }
     }
+
 }
 

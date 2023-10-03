@@ -6,10 +6,12 @@
     </div>
     
     <ul class='auto-filter-list' *ngIf="showList">
-        <li *ngFor="let item of list | filterItemByName:search | slice:0:20"
+        <li *ngFor="let item of list | filterItemByName:search | slice:0:limitToShow"
             (click)="onSelectOption($event,item)"
             appHighlightWord [searchedWord]="search" [originalWord]="item.name">
+            {{item.name}}
         </li>
+        <li *ngIf="listLength > limitToShow " (click)="showMore()">show more ...</li>
         <li *ngIf="showZeroState">No data to show</li>
     </ul>
 </div>
