@@ -19,9 +19,10 @@
     margin-top: -3px;
     max-height: 330px;
     overflow: auto;
+    padding: 0px;
 
     > li{
-        padding: 5px;
+        padding: 10px;
         list-style: none;
 
         &:hover {

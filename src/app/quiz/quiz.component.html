@@ -1,11 +1,15 @@
 <app-question *ngFor="let q of questions; index as i" [question]="q"
-              (change)="userAnswers[i] = $event"
+              (change)="changeAnswer($event,i)"
               (questionChanged)="changeQuestion(i)"
               [showChangeQuestionButton]="(showChangeQuestionButton$ | async)"
               [questionIndex]="i">
 </app-question>
 <div>
-  <button class="inverse large" *ngIf="userAnswers.length === 5" (click)="submit()">
+
+  <button class="inverse large" *ngIf="showSubmit" (click)="submit()">
     Submit
   </button>
+
+  <div>For debugging</div>
+  <div>{{userAnswers | json}}</div>
 </div>

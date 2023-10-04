@@ -1,10 +1,10 @@
 <div class="auto-filter">
     <div class="auto-filter-search row">
-        <input class="align-self-center" [(ngModel)]="search" (focus)="searchFocusIn()" (keyup)="searchChange()" [placeholder]="labelText">
-        <button class="clear align-self-center" (click)="clearSearch()">X</button>
+        <input class="align-self-center" [(ngModel)]="search" (focus)="searchFocusIn()" (keyup)="searchChange()" [placeholder]="labelText" #inputSearch>
+        <button class="clear align-self-center" (click)="clearSearch($event)">X</button>
     </div>
 
-    <ul class='auto-filter-list' *ngIf="showList">
+    <ul class='auto-filter-list' *ngIf="showList" #listOptions>
         <li *ngFor="let item of list | filterItemByName:search | slice:0:limitToShow ; trackBy: itemTrackBy"
             (click)="onSelectOption($event,item)"
             (keyup.enter)="onSelectOption($event,item)"
@@ -12,7 +12,7 @@
             tabindex="0">
             {{item.name}}
         </li>
-        <button *ngIf="listLength > limitToShow " (click)="showMore()">show more ...</button>
+        <button *ngIf="listLength > limitToShow " (click)="showMore($event)">show more ...</button>
         <li *ngIf="showZeroState">No data to show</li>
     </ul>
 </div>

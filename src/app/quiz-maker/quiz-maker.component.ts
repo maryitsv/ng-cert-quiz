@@ -16,9 +16,9 @@ export class QuizMakerComponent {
   categories$: Observable<Category[]>;
   subCategories$!: Observable<SubCategory[]>;
   questions$!: Observable<Question[]>;
-  categorySelected: string = this.defaultCategory;
-  subCategorySelected: string = this.defaultSubCategory;
-  difficultySelected: string = this.defaultDifficulty;
+  categorySelected: string = "";
+  subCategorySelected: string = "";
+  difficultySelected: string = "";
   difficulties: FilterItem[] =[
     {id:'Easy', name:'Easy'},
     {id:'Medium', name:'Medium'},

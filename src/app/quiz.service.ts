@@ -32,7 +32,7 @@ export class QuizService {
         return this.processCategories(res.trivia_categories);
       }),
       tap(items => console.log(items)),
-      catchError(error => {
+      catchError(() => {
         return [];
       })
     ).subscribe(categories => this.subjectCategories.next(categories));
@@ -84,7 +84,10 @@ export class QuizService {
     return this.http.get<{ results: ApiQuestion[] }>(
       `${this.API_URL}/api.php?amount=${amount}&category=${categoryId}&difficulty=${difficulty?.toLowerCase()}&type=multiple`)
       .pipe(
-        map(this.processQuestion)
+        map(this.processQuestion),
+        catchError(() => {
+          return [];
+        })
       );
   }
 
@@ -92,8 +95,12 @@ export class QuizService {
     this.previousFilter.categoryId = categoryId;
     this.previousFilter.difficulty = difficulty;
 
-    this.createQuizBase(categoryId, difficulty, amount).subscribe(questions => {
+    this.createQuizBase(categoryId, difficulty, amount)
+    .subscribe(questions => {
       this.subjectQuestions.next(questions);
+      this.subjectAllowQuestionChange.next(true);
+    }, error =>{
+      this.subjectQuestions.next([]);
       this.subjectAllowQuestionChange.next(true);
     });
     return this.questionsStored$;
